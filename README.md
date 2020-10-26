@@ -16,9 +16,11 @@ Set up credentials:
     wd config reset
     wd config credentials https://www.wikidata.org
 
-Run bot:
+Run bot, optionally with an ISBN prefix such as `3-`:
 
-    ./kxpwd.sh
+    ./kxpwd.sh 3-
+
+The current version only checks 10 ISBN found in Wikidata.
 
 ## License
 

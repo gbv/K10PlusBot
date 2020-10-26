@@ -2,6 +2,12 @@
 set -e
 
 LIMIT=10
+PREFIX=$1
+
+if [ -z "$PREFIX" ]
+then
+    echo "Please consider adding an ISBN-prefix as first argument"
+fi
 
 USER=$(wd config -j | jq -r '.credentials["https://www.wikidata.org"].username')
 if [ "$USER" != "K10PlusBot" ]
@@ -11,9 +17,10 @@ then
 fi
 
 # search for items with ISBN10 and no K10Plus PPN
-tee query.rql <<'SPARQL'
-SELECT ?qid ?isbn { 
-  ?qid wdt:P957 ?isbn
+tee query.rql <<SPARQL
+SELECT ?qid ?isbn {
+  ?qid wdt:P957 ?isbn .
+  FILTER( STRSTARTS( ?isbn, "$PREFIX" ) ) .
   FILTER NOT EXISTS { ?qid wdt:P6721 ?ppn }
 } LIMIT 10
 SPARQL

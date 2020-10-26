@@ -8,3 +8,18 @@
 * jq
 * wikidata-cli
 * catmandu
+
+## Usage
+
+Set up credentials:
+
+    wd config reset
+    wd config credentials https://www.wikidata.org
+
+Run bot:
+
+    ./kxpwd.sh
+
+## License
+
+The contents of this repository is published as public domain (Unlicense or CC0).

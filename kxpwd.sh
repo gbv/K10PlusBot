@@ -3,6 +3,13 @@ set -e
 
 LIMIT=10
 
+USER=$(wd config -j | jq -r '.credentials["https://www.wikidata.org"].username')
+if [ "$USER" != "K10PlusBot" ]
+then
+    echo "Script must be run with K10PlusBot credentials, run 'wd config'!"
+    exit
+fi
+
 # search for items with ISBN10 and no K10Plus PPN
 tee query.rql <<'SPARQL'
 SELECT ?qid ?isbn { 

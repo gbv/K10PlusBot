@@ -4,7 +4,7 @@
 
 ## Description
 
-This bots uses ISBN numbers to connect Wikidata items and K10plus records with [Wikidata property P6721](https://www.wikidata.org/wiki/Property:P6721).
+This bots uses ISBN numbers to connect Wikidata items and K10plus records with [Wikidata property P6721](https://www.wikidata.org/wiki/Property:P6721). See [the bot's user page](https://www.wikidata.org/wiki/User:K10PlusBot) for details.
 
 ## Requirements
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-LIMIT=10
+LIMIT=20
 PREFIX=$1
 
 if [ -z "$PREFIX" ]
@@ -23,31 +23,33 @@ SELECT ?qid ?isbn {
   ?qid wdt:P279*/wdt:P31 wd:Q3331189 .
   FILTER( STRSTARTS( ?isbn, "$PREFIX" ) ) .
   FILTER NOT EXISTS { ?qid wdt:P6721 ?ppn }
-} LIMIT 10
+} LIMIT $LIMIT
 SPARQL
 
 wd sparql query.rql | jq -r '.[]|[.qid,.isbn]|@tsv' | \
 while IFS=$'\t' read qid isbn
 do
   echo -e "ISBN\t$isbn"
-  if [ ! -z "$isbn" ]
+  if [ -z "$isbn" ]; then continue; fi
+  if grep -q "$isbn" isbn-not-found-in-kxp.txt; then continue; fi
+
+  CQL="pica.isb=$isbn"
+  PPN=$(catmandu convert kxp --query "$CQL" to CSV --header 0 --fix 'retain_field(_id)')
+  if [ ! -z "$PPN" ] && [ $(echo "$PPN" | wc -l) -eq 1 ]
   then
-    CQL="pica.isb=$isbn"
-    PPN=$(catmandu convert kxp --query "$CQL" to CSV --header 0 --fix 'retain_field(_id)')
-    if [ ! -z "$PPN" ] && [ $(echo "$PPN" | wc -l) -eq 1 ]
-    then
-        echo -e "PPN\t$PPN"
+      echo -e "PPN\t$PPN"
 
-        # check if item already has PPN (SPARQL may be out of sync)
-        CLAIMS=$(wd claims $qid P6721 --lang en)
-        if [[ $CLAIMS =~ ^[0-9]+[0-9X]$ ]]
-        then
-            echo -e "$qid P6721 $CLAIMS"
-        else
+      # check if item already has PPN (SPARQL may be out of sync)
+      CLAIMS=$(wd claims $qid P6721 --lang en)
+      if [[ $CLAIMS =~ ^[0-9]+[0-9X]$ ]]
+      then
+          echo -e "$qid P6721 $CLAIMS"
+      else
 
-            # add statement
-            wd add-claim "$qid" P6721 "$PPN"
-        fi
-    fi
+          # add statement
+          wd add-claim "$qid" P6721 "$PPN"
+      fi
+  else
+      echo "$isbn" >> isbn-not-found-in-kxp.txt
   fi
 done

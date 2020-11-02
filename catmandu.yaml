@@ -6,3 +6,8 @@ importer:
       recordSchema: picaxml
       parser: picaxml
       limit: 100
+exporter:
+  plain:
+    package: CSV
+    options:
+      header: 0

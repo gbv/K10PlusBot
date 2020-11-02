@@ -1,14 +1,15 @@
 #!/bin/bash
 set -e
 
-LIMIT=20
-PREFIX=$1
+LIMIT=20    # how many ISBN to query at most
+PREFIX=$1   # optional ISBN prefix
 
 if [ -z "$PREFIX" ]
 then
     echo "Please consider adding an ISBN-prefix as first argument"
 fi
 
+# make sure the script is run as user K0PlusBot (requires plain-text credential)
 USER=$(wd config -j | jq -r '.credentials["https://www.wikidata.org"].username')
 if [ "$USER" != "K10PlusBot" ]
 then
@@ -30,11 +31,16 @@ wd sparql query.rql | jq -r '.[]|[.qid,.isbn]|@tsv' | \
 while IFS=$'\t' read qid isbn
 do
   echo -e "ISBN\t$isbn"
-  if [ -z "$isbn" ]; then continue; fi
+  if [ -z "$isbn" ]; then continue; fi  # empty line
+
+  # ISBN was already looked up in K10plus without success (or with multiple hits)
   if grep -q "$isbn" isbn-not-found-in-kxp.txt; then continue; fi
 
+  # Query for ISBN in K10Plus via SRU (see `catmandu.yaml` for config)
   CQL="pica.isb=$isbn"
-  PPN=$(catmandu convert kxp --query "$CQL" to CSV --header 0 --fix 'retain_field(_id)')
+  PPN=$(catmandu convert kxp --query "$CQL" to plain --fix 'retain_field(_id)')
+
+  # if there is exactely one PPN
   if [ ! -z "$PPN" ] && [ $(echo "$PPN" | wc -l) -eq 1 ]
   then
       echo -e "PPN\t$PPN"

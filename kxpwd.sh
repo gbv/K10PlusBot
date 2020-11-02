@@ -16,10 +16,11 @@ then
     exit
 fi
 
-# search for items with ISBN10 and no K10Plus PPN
+# search for edition items with ISBN-10 or ISBN-13 and no K10Plus PPN
 tee query.rql <<SPARQL
 SELECT ?qid ?isbn {
-  ?qid wdt:P957 ?isbn .
+  { { ?qid wdt:P957 ?isbn } UNION { ?qid wdt:P212 ?isbn } }
+  ?qid wdt:P279*/wdt:P31 wd:Q3331189 .
   FILTER( STRSTARTS( ?isbn, "$PREFIX" ) ) .
   FILTER NOT EXISTS { ?qid wdt:P6721 ?ppn }
 } LIMIT 10

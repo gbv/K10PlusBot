@@ -24,8 +24,6 @@ Run bot, optionally with an ISBN prefix such as `3-`:
 
     ./kxpwd.sh 3-
 
-The current version only checks 10 ISBN found in Wikidata.
-
 The script `./stats.sh` will count usage of K10plus property and ISBN properties.
 
 ## License

@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-LIMIT=20    # how many ISBN to query at most
-PREFIX=$1   # optional ISBN prefix
+PREFIX=$1       # optional ISBN prefix
+LIMIT=${2:-20}  # how many ISBN to query at most
 
 if [ -z "$PREFIX" ]
 then

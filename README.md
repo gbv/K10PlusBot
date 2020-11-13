@@ -12,6 +12,7 @@ This bots uses ISBN numbers to connect Wikidata items and K10plus records with [
 * jq
 * wikidata-cli
 * catmandu
+* meermaid (only for documentation)
 
 ## Usage
 

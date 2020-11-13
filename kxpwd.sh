@@ -30,8 +30,8 @@ SPARQL
 wd sparql query.rql | jq -r '.[]|[.qid,.isbn]|@tsv' | \
 while IFS=$'\t' read qid isbn
 do
-  echo -e "ISBN\t$isbn"
   if [ -z "$isbn" ]; then continue; fi  # empty line
+  echo -e "ISBN\t$isbn"
 
   # ISBN was already looked up in K10plus without success (or with multiple hits)
   if grep -q "$isbn" isbn-not-found-in-kxp.txt; then continue; fi
@@ -59,3 +59,15 @@ do
       echo "$isbn" >> isbn-not-found-in-kxp.txt
   fi
 done
+
+:<<GRAPH
+flowchart TD
+  1(check user account) -->|ok| 2
+  2(query edition items<br/> with ISBN<br/>but no K10plus PPN) --> loop
+  subgraph loop[for each QID,ISBN]
+    A(ISBN already looked up?) --> |no| B(look up ISBN in K10plus)
+    B --> C(exactely one PPN found?)
+    C -->|yes| D(item QID already has K10Plus PPN?)
+    D -->|no| E(Add claim with PPN to QID)
+  end
+GRAPH

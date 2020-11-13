@@ -34,7 +34,7 @@ do
   echo -e "ISBN\t$isbn"
 
   # ISBN was already looked up in K10plus without success (or with multiple hits)
-  if grep -q "$isbn" isbn-not-found-in-kxp.txt; then continue; fi
+  if grep -q "$isbn" isbn-looked-up-in-kxp.txt; then continue; fi
 
   # Query for ISBN in K10Plus via SRU (see `catmandu.yaml` for config)
   CQL="pica.isb=$isbn"
@@ -56,7 +56,7 @@ do
           wd add-claim "$qid" P6721 "$PPN"
       fi
   else
-      echo "$isbn" >> isbn-not-found-in-kxp.txt
+      echo "$isbn" >> isbn-looked-up-in-kxp.txt
   fi
 done
 

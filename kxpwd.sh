@@ -3,6 +3,7 @@ set -e
 
 PREFIX=$1       # optional ISBN prefix
 LIMIT=${2:-20}  # how many ISBN to query at most
+DELAY=5s        # between edits
 
 if [ -z "$PREFIX" ]
 then
@@ -54,6 +55,7 @@ do
 
           # add statement
           wd add-claim "$qid" P6721 "$PPN"
+          sleep $DELAY
       fi
   else
       echo "$isbn" >> isbn-looked-up-in-kxp.txt

@@ -42,13 +42,25 @@ cd K10PlusBot
     wd config reset
     wd config credentials https://www.wikidata.org
 
-## Usage
+## Scripts and their usage
+
+### kxpwd
+
+Add K10plus PPN statements based on existing ISBN statements.
 
 Run bot, optionally with an ISBN prefix such as `3-`:
 
     ./kxpwd.sh 3-
 
-The script `./stats.sh` will count usage of K10plus property and ISBN properties.
+Second argument is maximum number of identifiers to retrieve.
+
+### stats
+
+`./stats.sh` will count usage of K10plus property and ISBN properties.
+
+### remove-human-claims
+
+Remove K10plus PPPN statements on items about humans (Q5). The property should only be used on bibliographic records.
 
 ## License
 

@@ -31,6 +31,8 @@ SPARQL
 wd sparql -f table query.rql | tail -n +2 | \
 while read qid isbn
 do
+  echo -e "ISBN\t$isbn"
+
   # ISBN was already looked up in K10plus without success (or with multiple hits)
   if grep -q "$isbn" isbn-looked-up-in-kxp.txt; then continue; fi
 

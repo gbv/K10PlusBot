@@ -1,10 +1,10 @@
 # K10PlusBot
 
-> Interlink Wikidata and K10plus library union catalog.
+> Interlink Wikidata and K10plus library union catalog
 
 ## Description
 
-This bots uses ISBN numbers to connect Wikidata items and K10plus records with [Wikidata property P6721](https://www.wikidata.org/wiki/Property:P6721). See [the bot's user page](https://www.wikidata.org/wiki/User:K10PlusBot) for details.
+This bot adds and uses Wikidata items with [Property P6721 (K10Plus PPN)](https://www.wikidata.org/wiki/Property:P6721). To interlink and align Wikidata and K10plus library union catalog. See [the bot's user page](https://www.wikidata.org/wiki/User:K10PlusBot) for additional information and status.
 
 ## Requirements
 
@@ -48,19 +48,17 @@ cd K10PlusBot
 
 Add K10plus PPN statements based on existing ISBN statements.
 
-Run bot, optionally with an ISBN prefix such as `3-`:
+Run bot, optionally with an ISBN prefix such as `3-` and a maximum number of ISBNs as second argument:
 
-    ./kxpwd.sh 3-
-
-Second argument is maximum number of identifiers to retrieve.
+    ./kxpwd.sh 3- 1000
 
 ### stats
 
-`./stats.sh` will count usage of K10plus property and ISBN properties.
+`./stats.sh` counts usage of K10plus property and ISBN properties.
 
 ### remove-human-claims
 
-Remove K10plus PPPN statements on items about humans (Q5). The property should only be used on bibliographic records.
+Remove K10plus PPPN statements on items about humans (Q5) because the property should only be used on bibliographic records.
 
 ## License
 

@@ -42,6 +42,8 @@ cd K10PlusBot
     wd config reset
     wd config credentials https://www.wikidata.org
 
+Add field `user` with value `K10PlusBot` to the config file (`wd config path`).
+
 ## Scripts and their usage
 
 ### kxpwd

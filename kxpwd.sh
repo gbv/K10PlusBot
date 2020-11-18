@@ -10,8 +10,8 @@ then
     echo "Please consider adding an ISBN-prefix as first argument"
 fi
 
-# make sure the script is run as user K0PlusBot (requires plain-text credential)
-USER=$(wd config -j | jq -r '.credentials["https://www.wikidata.org"].username')
+# make sure the script is run as user K0PlusBot
+USER=$(wd config -j | jq -r .user)
 if [ "$USER" != "K10PlusBot" ]
 then
     echo "Script must be run with K10PlusBot credentials, run 'wd config'!"
@@ -28,12 +28,9 @@ SELECT ?qid ?isbn {
 } LIMIT $LIMIT
 SPARQL
 
-wd sparql query.rql | jq -r '.[]|[.qid,.isbn]|@tsv' | \
-while IFS=$'\t' read qid isbn
+wd sparql -f table query.rql | tail -n +2 | \
+while read qid isbn
 do
-  if [ -z "$isbn" ]; then continue; fi  # empty line
-  echo -e "ISBN\t$isbn"
-
   # ISBN was already looked up in K10plus without success (or with multiple hits)
   if grep -q "$isbn" isbn-looked-up-in-kxp.txt; then continue; fi
 
@@ -61,15 +58,3 @@ do
       echo "$isbn" >> isbn-looked-up-in-kxp.txt
   fi
 done
-
-:<<GRAPH
-flowchart TD
-  1(check user account) -->|ok| 2
-  2(query edition items<br/> with ISBN<br/>but no K10plus PPN) --> loop
-  subgraph loop[for each QID,ISBN]
-    A(ISBN already looked up?) --> |no| B(look up ISBN in K10plus)
-    B --> C(exactely one PPN found?)
-    C -->|yes| D(item QID already has K10Plus PPN?)
-    D -->|no| E(Add claim with PPN to QID)
-  end
-GRAPH

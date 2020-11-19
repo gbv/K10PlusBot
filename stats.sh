@@ -12,4 +12,4 @@ ISBN=$(count "{ ?x wdt:P957 [] } UNION { ?x wdt:P212 [] }")
 NOKXP=$(count "{ ?x wdt:P957 [] } UNION { ?x wdt:P212 [] } FILTER NOT EXISTS { ?x wdt:P6721 [] }")
 CHECKED=$(wc -l < isbn-looked-up-in-kxp.txt)
 
-echo -e "$(date '+%Y-%m-%d')\t$P6721\t$ISBN10\t$ISBN13\t$ISBN\t$NOKXP\t$CHECKED"
+echo -e "$(date -Is)\t$P6721\t$ISBN10\t$ISBN13\t$ISBN\t$NOKXP\t$CHECKED"

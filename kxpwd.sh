@@ -2,12 +2,19 @@
 set -e
 
 PREFIX=$1       # optional ISBN prefix
-LIMIT=${2:-20}  # how many ISBN to query at most
+LIMIT=$2        # how many ISBN to query at most
 DELAY=5s        # between edits
 
 if [ -z "$PREFIX" ]
 then
     echo "Please consider adding an ISBN-prefix as first argument"
+fi
+
+if [ -z "$LIMIT" ]
+then
+    echo "Please consider adding a LIMIT as second argument"
+else
+    LIMIT="LIMIT $LIMIT"
 fi
 
 # make sure the script is run as user K0PlusBot
@@ -25,7 +32,7 @@ SELECT ?qid ?isbn {
   ?qid wdt:P279*/wdt:P31 wd:Q3331189 .
   FILTER( STRSTARTS( ?isbn, "$PREFIX" ) ) .
   FILTER NOT EXISTS { ?qid wdt:P6721 ?ppn }
-} LIMIT $LIMIT
+} $LIMIT
 SPARQL
 
 wd sparql -f table query.rql | tail -n +2 | \

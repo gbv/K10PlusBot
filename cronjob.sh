@@ -1,5 +1,6 @@
 #/bin/bash
 
-cd /srv/k10plusbot "" 2000
+date -Is
+cd /srv/k10plusbot
 ./stats.sh >> stats.log
-timeout 15m kxpwd.sh
+timeout 15m ./kxpwd.sh

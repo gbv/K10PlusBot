@@ -1,4 +1,4 @@
-default: verlinkung-wikidata-k10plus.html
+default: verlinkung-wikidata-k10plus.html linking-wikidata-k10plus.html
 
 .SUFFIXES: .md .html
 

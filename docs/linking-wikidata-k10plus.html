@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Jakob Voß">
+  <meta name="dcterms.date" content="2020-11-18">
+  <title>Linking Wikidata and K10plus with K10plusBot</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@3.9.2//css/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@3.9.2//css/reveal.css">
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@3.9.2//css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="reveal-gbv.css"/>
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'https://unpkg.com/reveal.js@3.9.2//css/print/pdf.css' : 'https://unpkg.com/reveal.js@3.9.2//css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="https://unpkg.com/reveal.js@3.9.2//lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Linking Wikidata and K10plus with K10plusBot</h1>
+  <p class="subtitle">SWIB 2020 Lightning Talk</p>
+  <p class="author">Jakob Voß</p>
+  <p class="date">2020-11-18</p>
+</section>
+
+<section id="example" class="slide level1">
+<h1>Example</h1>
+<p>Linus Torvalds: <em>Just for Fun</em> (2001)</p>
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Wikidata</td>
+<td style="text-align: left;"><a href="https://www.wikidata.org/wiki/Q43395559">Q43395559</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ISBN</td>
+<td style="text-align: left;">3-446-21684-7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">K10plus PPN</td>
+<td style="text-align: left;"><a href="https://opac.k10plus.de/DB=2.299/PPNSET?PPN=330720252">330720252</a></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="linking" class="slide level1">
+<h1>Linking</h1>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Item</th>
+<th style="text-align: left;">Property</th>
+<th style="text-align: left;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://www.wikidata.org/wiki/Q43395559">Q43395559</a></td>
+<td style="text-align: left;"><a href="https://www.wikidata.org/wiki/Property:P6721">P6721</a></td>
+<td style="text-align: left;"><a href="https://opac.k10plus.de/DB=2.299/PPNSET?PPN=330720252">330720252</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>Just for Fun</em></td>
+<td style="text-align: left;">K10plus edition PPN</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<p><em>Link is added as <a href="http://www.wikidata.org/entity/statement/Q43395559-DE68AC74-B842-4400-A4B0-09B01C78F865">Wikidata Statement</a></em></p>
+</section>
+<section id="how-to-get-a-wikidata-bot" class="slide level1">
+<h1>How to get a Wikidata Bot</h1>
+<ol type="1">
+<li><p>Create Wikidata Account (<code>NAMEBot</code>)</p></li>
+<li><p>Coding Bot, provide sources in a public repository</p></li>
+<li><p>Documentation and tests</p></li>
+<li><p>Request Bot status</p></li>
+<li><p>Run Bot and regularly check</p></li>
+</ol>
+<p><a href="https://www.wikidata.org/wiki/Wikidata:Bots" class="uri">https://www.wikidata.org/wiki/Wikidata:Bots</a></p>
+</section>
+<section id="implementation-and-further-information" class="slide level1">
+<h1>Implementation and further Information</h1>
+<ul>
+<li><p><a href="https://github.com/gbv/K10PlusBot" class="uri">https://github.com/gbv/K10PlusBot</a></p></li>
+<li><p><a href="https://www.wikidata.org/wiki/User:K10PlusBot" class="uri">https://www.wikidata.org/wiki/User:K10PlusBot</a></p></li>
+</ul>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@3.9.2//js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'https://unpkg.com/reveal.js@3.9.2//lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'https://unpkg.com/reveal.js@3.9.2//plugin/zoom-js/zoom.js', async: true },
+          { src: 'https://unpkg.com/reveal.js@3.9.2//plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>
+  for (let pre of Array.from(document.getElementsByClassName("mermaid"))) {
+    var div = document.createElement("div")
+    div.className = "mermaid"
+    div.textContent = pre.firstChild.textContent
+    pre.parentNode.replaceChild(div, pre)
+  }
+  mermaid.initialize({startOnLoad:true})
+  </script>
+    </body>
+</html>

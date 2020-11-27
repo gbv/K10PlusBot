@@ -1,7 +1,7 @@
 ---
-title: Linking Wikidata and K10plus with K10plusBot
+title: Linking K10plus library union catalog with Wikidata
 subtitle: SWIB 2020 Lightning Talk
-date: 2020-11-18
+date: 2020-11-27
 author:
 - Jakob Voß
 ---

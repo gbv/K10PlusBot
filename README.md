@@ -6,6 +6,13 @@
 
 This bot adds and uses Wikidata items with [Property P6721 (K10Plus PPN)](https://www.wikidata.org/wiki/Property:P6721). To interlink and align Wikidata and K10plus library union catalog. See [the bot's user page](https://www.wikidata.org/wiki/User:K10PlusBot) for additional information and status.
 
+## Publications
+
+The subdirectory [docs/](docs/) contains publications about the Bot:
+
+* *Verlinkung von Wikidata und K10plus mit dem K10plusBot* (2020-11-18) <https://doi.org/10.5446/50003>. Short presentation i German (9:20).
+* *Linking K10plus library union catalog with Wikidata* (2020-). Lightning talk at [SWIB 2020 conference](http://swib.org/swib20/): recording [at YouTube](https://www.youtube.com/watch?v=YNI6ty4gpDw) (03:58).
+
 ## Requirements
 
 The bot requires a Unix system with:
@@ -53,6 +60,8 @@ Add K10plus PPN statements based on existing ISBN statements.
 Run bot, optionally with an ISBN prefix such as `3-` and a maximum number of ISBNs as second argument:
 
     ./kxpwd.sh 3- 1000
+
+As Wikidata SPARQL tends to return result sets smaller than the actual results (for result sets larger than several thousands), the bot should be run in batches of different prefixes.
 
 ### stats
 

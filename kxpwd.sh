@@ -29,7 +29,13 @@ fi
 tee query.rql <<SPARQL
 SELECT ?qid ?isbn {
   { { ?qid wdt:P957 ?isbn } UNION { ?qid wdt:P212 ?isbn } }
-  ?qid wdt:P279*/wdt:P31 wd:Q3331189 .
+  { 
+    { ?qid wdt:P279*/wdt:P31 wd:Q3331189 } # edition
+    UNION { ?qid wdt:P31 wd:Q571 }     	# book
+    UNION { ?qid wdt:P31 wd:Q20540385 } # non-fiction book
+    UNION { ?qid wdt:P31 wd:Q193955 } 	# hardback
+    UNION { ?qid wdt:P31 wd:Q193934 } 	# paperback
+  }
   FILTER( STRSTARTS( ?isbn, "$PREFIX" ) ) .
   FILTER NOT EXISTS { ?qid wdt:P6721 ?ppn }
 } $LIMIT
@@ -47,8 +53,13 @@ do
   CQL="pica.isb=$isbn"
   PPN=$(catmandu convert kxp --query "$CQL" to plain --fix 'retain_field(_id)')
 
+  HITS=$(echo "$PPN" | wc -l)
+  if [ -z "$PPN" ]; then
+    HITS=0
+  fi
+
   # if there is exactely one PPN
-  if [ ! -z "$PPN" ] && [ $(echo "$PPN" | wc -l) -eq 1 ]
+  if [ "$HITS" -eq 1 ]
   then
       echo -e "PPN\t$PPN"
 
@@ -64,6 +75,6 @@ do
           sleep $DELAY
       fi
   else
-      echo "$isbn" >> isbn-looked-up-in-kxp.txt
+      echo "$isbn $HITS" >> isbn-looked-up-in-kxp.txt
   fi
 done

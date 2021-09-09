@@ -3,4 +3,6 @@
 date -Is
 cd /srv/k10plusbot
 ./stats.sh >> stats.log
-timeout 15m ./kxpwd.sh
+
+timeout 20m ./kxpwd-doi.sh
+timeout 30m ./kxpwd.sh

@@ -10,6 +10,7 @@ ISBN10=$(count "?x wdt:P957 []")
 ISBN13=$(count "?x wdt:P212 []")
 ISBN=$(count "{ ?x wdt:P957 [] } UNION { ?x wdt:P212 [] }")
 NOKXP=$(count "{ ?x wdt:P957 [] } UNION { ?x wdt:P212 [] } FILTER NOT EXISTS { ?x wdt:P6721 [] }")
-CHECKED=$(wc -l < isbn-looked-up-in-kxp.txt)
+CHECKED=$(cat isbn-looked-up-in-kxp.txt doi-looked-up-in-kxp.txt | wc -l)
+PROCEEDINGS=$(count "?x wdt:P31/wdt:P279* wd:Q1143604 . ?x wdt:P356 []")
 
-echo -e "$(date -Is)\t$P6721\t$ISBN10\t$ISBN13\t$ISBN\t$NOKXP\t$CHECKED"
+echo -e "$(date -Is)\t$P6721\t$ISBN10\t$ISBN13\t$ISBN\t$NOKXP\t$CHECKED\t$PROCEEDINGS"

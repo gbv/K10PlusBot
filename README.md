@@ -58,6 +58,16 @@ Run bot, optionally with an ISBN prefix such as `3-` and a maximum number of ISB
 
     ./kxpwd.sh 3- 1000
 
+Processed ISBN are logged to `isbn-looked-up-in-kxp.txt` and `isbn-not-found-in-kxp.txt`.
+
+### kxpwd-doi
+
+Add K10plus PPN statements based on existing DOI statements. By now only proceedings (Q1143604) are include. See [this SPARQL query](https://w.wiki/43AB) to get the number of proceedings items with DOI.
+
+Run bot, optionally with a DOI prefix and a maximum number of DOIs as second argument.
+
+Processed DOI are logged to `doi-looked-up-in-kxp.txt`.
+
 ### stats
 
 `./stats.sh` counts usage of K10plus property and ISBN properties.

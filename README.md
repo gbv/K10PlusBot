@@ -6,6 +6,13 @@
 
 This bot adds and uses Wikidata items with [Property P6721 (K10Plus PPN)](https://www.wikidata.org/wiki/Property:P6721). To interlink and align Wikidata and K10plus library union catalog. See [the bot's user page](https://www.wikidata.org/wiki/User:K10PlusBot) for additional information and status.
 
+## Publications
+
+The subdirectory `docs/` contains publications about the Bot:
+
+* *Verlinkung von Wikidata und K10plus mit dem K10plusBot* (2020-11-18) https://doi.org/10.5446/50003. Short presentation in German (9:20).
+* *Linking K10plus library union catalog with Wikidata* (2020-) Lightning talk at [SWIB 2020 conference](http://swib.org/swib20/): recording [at YouTube](https://www.youtube.com/watch?v=YNI6ty4gpDw) (03:58).
+
 ## Requirements
 
 The bot requires a Unix system with:
